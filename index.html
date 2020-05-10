@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/style.css">
+        <title>おみくじ</title>
+    </head>
+    <body>
+        <header class="header">
+            <h1 class="header__head">おみくじ</h1>
+        </header>
+        <main class="main">
+            <div class="fancy-button">
+                <div class="left-frills frills"></div>
+                <div id="btn" class="button">今日の運勢を占う</div>
+                <div class="right-frills frills"></div>
+                <div id="show"></div>
+            </div>
+        </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+            // 要素の取得
+            const btn = document.getElementById('btn');
+            const isShow = document.getElementById('show');
+
+            // 画像を配列
+            result = ['大吉', '中吉', '小吉', '吉', '凶'];
+            images = ['img/omikuji-daikichi.png', 'img/omikuji-chukichi.png', 'img/omikuji-shokichi.png', 'img/omikuji-kichi.png', 'img/omikuji-kyo.png'];
+
+            // 関数を定義
+            function call(resultNum, imagesNum) {
+                isShow.innerHTML = '<p class="omikuji-text">' + resultNum + '</p>' + '<img class="omikuji-img" src="' + images[imagesNum] + '">'
+            }
+
+            // ボタンをクリックしたら
+            btn.addEventListener('click', function () {
+                // 乱数の設定
+                const num = Math.floor(Math.random() * result.length);
+                if (num == 0) {
+                    call(result[0], 0)
+                }
+                if (num == 1) {
+                    call(result[1], 1)
+                }
+                if (num == 2) {
+                    call(result[2], 2)
+                }
+                if (num == 3) {
+                    call(result[3], 3)
+                }
+                if (num == 4) {
+                    call(result[4], 4)
+                }
+            });
+
+            // ボタンエフェクト
+            $(".fancy-button").mousedown(function () {
+                $(this).bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function () {
+                    $(this).removeClass('active');
+                })
+                $(this).addClass("active");
+            });
+        </script>
+    </body>
+</html>
